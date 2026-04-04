@@ -1,0 +1,4 @@
+twin_index,scenario,chosen_action,cost,details
+0,network,reroute:ingress->core_a->seg_a->siem,3.4,"{""latency"": 3.4, ""path"": [""ingress"", ""core_a"", ""seg_a"", ""siem""]}"
+1,network,reroute:ingress->core_a->ids->siem,2.4,"{""latency"": 2.4, ""path"": [""ingress"", ""core_a"", ""ids"", ""siem""]}"
+2,network,reroute:ingress->core_a->ids->siem,2.4,"{""latency"": 2.4, ""path"": [""ingress"", ""core_a"", ""ids"", ""siem""]}"

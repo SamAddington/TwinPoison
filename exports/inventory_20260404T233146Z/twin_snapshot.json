@@ -1,0 +1,29 @@
+{
+  "name": "inventory_base_poisoned",
+  "scenario": "inventory",
+  "metadata": {
+    "sku": "kit-7",
+    "required_qty": 25
+  },
+  "nodes": [
+    {
+      "id": "wh_west",
+      "type": "warehouse",
+      "stock": 20,
+      "distance": 4.0
+    },
+    {
+      "id": "wh_central",
+      "type": "warehouse",
+      "stock": 32,
+      "distance": 2.0
+    },
+    {
+      "id": "wh_east",
+      "type": "warehouse",
+      "stock": 60,
+      "distance": 6.0
+    }
+  ],
+  "edges": []
+}

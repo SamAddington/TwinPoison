@@ -1,0 +1,2 @@
+[console_scripts]
+twinpoison = twinpoison.cli:main

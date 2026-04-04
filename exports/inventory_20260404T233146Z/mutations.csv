@@ -1,0 +1,3 @@
+kind,target,note,before,after
+inventory_shift,wh_central,phantom inventory,"{""distance"": 2.0, ""stock"": 22, ""type"": ""warehouse""}","{""distance"": 2.0, ""stock"": 32, ""type"": ""warehouse""}"
+inventory_shift,wh_west,stock disappearance,"{""distance"": 4.0, ""stock"": 40, ""type"": ""warehouse""}","{""distance"": 4.0, ""stock"": 20, ""type"": ""warehouse""}"

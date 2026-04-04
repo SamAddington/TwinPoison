@@ -1,0 +1,167 @@
+{
+  "generated_at_utc": "2026-04-04T23:31:46.427863+00:00",
+  "scenario": "network",
+  "summary": {
+    "clean_action": "reroute:ingress->core_a->ids->siem",
+    "clean_cost": 2.4,
+    "poisoned_action": "reroute:ingress->core_a->seg_a->siem",
+    "poisoned_cost": 3.4,
+    "action_changed": true,
+    "cost_delta": 1.0,
+    "consensus_score": 0.6666666666666666,
+    "majority_action": "reroute:ingress->core_a->ids->siem",
+    "policy_decision": "review"
+  },
+  "clean_result": {
+    "scenario": "network",
+    "chosen_action": "reroute:ingress->core_a->ids->siem",
+    "cost": 2.4,
+    "details": {
+      "path": [
+        "ingress",
+        "core_a",
+        "ids",
+        "siem"
+      ],
+      "latency": 2.4
+    }
+  },
+  "poisoned_result": {
+    "scenario": "network",
+    "chosen_action": "reroute:ingress->core_a->seg_a->siem",
+    "cost": 3.4,
+    "details": {
+      "path": [
+        "ingress",
+        "core_a",
+        "seg_a",
+        "siem"
+      ],
+      "latency": 3.4
+    }
+  },
+  "mutations": [
+    {
+      "kind": "edge_cost_shift",
+      "target": "core_a->ids",
+      "before": {
+        "latency": 0.8,
+        "cost": 0.8,
+        "capacity": 10.0,
+        "trust": "baseline"
+      },
+      "after": {
+        "latency": 8.0,
+        "cost": 8.0,
+        "capacity": 10.0,
+        "trust": "baseline"
+      },
+      "note": "telemetry detour inflation"
+    },
+    {
+      "kind": "phantom_edge",
+      "target": "core_b->siem",
+      "before": {},
+      "after": {
+        "latency": 2.2,
+        "cost": 0.3,
+        "capacity": 5.0,
+        "trust": "unverified",
+        "phantom": true
+      },
+      "note": "unverified shortcut to SIEM"
+    }
+  ],
+  "consensus": {
+    "score": 0.6666666666666666,
+    "majority_action": "reroute:ingress->core_a->ids->siem",
+    "actions": [
+      "reroute:ingress->core_a->seg_a->siem",
+      "reroute:ingress->core_a->ids->siem",
+      "reroute:ingress->core_a->ids->siem"
+    ],
+    "results": [
+      {
+        "scenario": "network",
+        "chosen_action": "reroute:ingress->core_a->seg_a->siem",
+        "cost": 3.4,
+        "details": {
+          "path": [
+            "ingress",
+            "core_a",
+            "seg_a",
+            "siem"
+          ],
+          "latency": 3.4
+        }
+      },
+      {
+        "scenario": "network",
+        "chosen_action": "reroute:ingress->core_a->ids->siem",
+        "cost": 2.4,
+        "details": {
+          "path": [
+            "ingress",
+            "core_a",
+            "ids",
+            "siem"
+          ],
+          "latency": 2.4
+        }
+      },
+      {
+        "scenario": "network",
+        "chosen_action": "reroute:ingress->core_a->ids->siem",
+        "cost": 2.4,
+        "details": {
+          "path": [
+            "ingress",
+            "core_a",
+            "ids",
+            "siem"
+          ],
+          "latency": 2.4
+        }
+      }
+    ]
+  },
+  "decision": {
+    "action": "review",
+    "reasons": [
+      "cross-twin consensus below threshold (0.67 < 0.80)"
+    ],
+    "consensus_score": 0.6666666666666666,
+    "findings": [
+      {
+        "name": "non_negative_costs",
+        "passed": true,
+        "severity": "high",
+        "message": "all edge costs are non-negative"
+      },
+      {
+        "name": "non_negative_capacity",
+        "passed": true,
+        "severity": "high",
+        "message": "all capacities are non-negative"
+      },
+      {
+        "name": "non_negative_inventory",
+        "passed": true,
+        "severity": "high",
+        "message": "all stock values are non-negative"
+      },
+      {
+        "name": "no_silent_risk_downgrade",
+        "passed": true,
+        "severity": "medium",
+        "message": "no silent high-risk downgrades detected"
+      },
+      {
+        "name": "critical_reachability",
+        "passed": true,
+        "severity": "high",
+        "message": "all critical nodes are reachable from the configured source"
+      }
+    ]
+  }
+}

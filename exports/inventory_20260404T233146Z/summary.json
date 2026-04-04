@@ -1,0 +1,147 @@
+{
+  "generated_at_utc": "2026-04-04T23:31:46.426111+00:00",
+  "scenario": "inventory",
+  "summary": {
+    "clean_action": "pick_from:wh_west",
+    "clean_cost": 4.0,
+    "poisoned_action": "pick_from:wh_central",
+    "poisoned_cost": 2.0,
+    "action_changed": true,
+    "cost_delta": -2.0,
+    "consensus_score": 0.6666666666666666,
+    "majority_action": "pick_from:wh_west",
+    "policy_decision": "review"
+  },
+  "clean_result": {
+    "scenario": "inventory",
+    "chosen_action": "pick_from:wh_west",
+    "cost": 4.0,
+    "details": {
+      "sku": "kit-7",
+      "warehouse": "wh_west",
+      "stock": 40
+    }
+  },
+  "poisoned_result": {
+    "scenario": "inventory",
+    "chosen_action": "pick_from:wh_central",
+    "cost": 2.0,
+    "details": {
+      "sku": "kit-7",
+      "warehouse": "wh_central",
+      "stock": 32
+    }
+  },
+  "mutations": [
+    {
+      "kind": "inventory_shift",
+      "target": "wh_central",
+      "before": {
+        "type": "warehouse",
+        "stock": 22,
+        "distance": 2.0
+      },
+      "after": {
+        "type": "warehouse",
+        "stock": 32,
+        "distance": 2.0
+      },
+      "note": "phantom inventory"
+    },
+    {
+      "kind": "inventory_shift",
+      "target": "wh_west",
+      "before": {
+        "type": "warehouse",
+        "stock": 40,
+        "distance": 4.0
+      },
+      "after": {
+        "type": "warehouse",
+        "stock": 20,
+        "distance": 4.0
+      },
+      "note": "stock disappearance"
+    }
+  ],
+  "consensus": {
+    "score": 0.6666666666666666,
+    "majority_action": "pick_from:wh_west",
+    "actions": [
+      "pick_from:wh_central",
+      "pick_from:wh_west",
+      "pick_from:wh_west"
+    ],
+    "results": [
+      {
+        "scenario": "inventory",
+        "chosen_action": "pick_from:wh_central",
+        "cost": 2.0,
+        "details": {
+          "sku": "kit-7",
+          "warehouse": "wh_central",
+          "stock": 32
+        }
+      },
+      {
+        "scenario": "inventory",
+        "chosen_action": "pick_from:wh_west",
+        "cost": 4.0,
+        "details": {
+          "sku": "kit-7",
+          "warehouse": "wh_west",
+          "stock": 40
+        }
+      },
+      {
+        "scenario": "inventory",
+        "chosen_action": "pick_from:wh_west",
+        "cost": 4.0,
+        "details": {
+          "sku": "kit-7",
+          "warehouse": "wh_west",
+          "stock": 40
+        }
+      }
+    ]
+  },
+  "decision": {
+    "action": "review",
+    "reasons": [
+      "cross-twin consensus below threshold (0.67 < 0.80)"
+    ],
+    "consensus_score": 0.6666666666666666,
+    "findings": [
+      {
+        "name": "non_negative_costs",
+        "passed": true,
+        "severity": "high",
+        "message": "all edge costs are non-negative"
+      },
+      {
+        "name": "non_negative_capacity",
+        "passed": true,
+        "severity": "high",
+        "message": "all capacities are non-negative"
+      },
+      {
+        "name": "non_negative_inventory",
+        "passed": true,
+        "severity": "high",
+        "message": "all stock values are non-negative"
+      },
+      {
+        "name": "no_silent_risk_downgrade",
+        "passed": true,
+        "severity": "medium",
+        "message": "no silent high-risk downgrades detected"
+      },
+      {
+        "name": "critical_reachability",
+        "passed": true,
+        "severity": "medium",
+        "message": "no critical nodes configured"
+      }
+    ]
+  }
+}

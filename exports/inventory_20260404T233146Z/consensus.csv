@@ -1,0 +1,4 @@
+twin_index,scenario,chosen_action,cost,details
+0,inventory,pick_from:wh_central,2.0,"{""sku"": ""kit-7"", ""stock"": 32, ""warehouse"": ""wh_central""}"
+1,inventory,pick_from:wh_west,4.0,"{""sku"": ""kit-7"", ""stock"": 40, ""warehouse"": ""wh_west""}"
+2,inventory,pick_from:wh_west,4.0,"{""sku"": ""kit-7"", ""stock"": 40, ""warehouse"": ""wh_west""}"

@@ -1,0 +1,151 @@
+{
+  "generated_at_utc": "2026-04-04T23:31:46.423874+00:00",
+  "scenario": "triage",
+  "summary": {
+    "clean_action": "triage_first:alert_lateral_movement",
+    "clean_cost": 6.0,
+    "poisoned_action": "triage_first:alert_email_bec",
+    "poisoned_cost": 27.0,
+    "action_changed": true,
+    "cost_delta": 21.0,
+    "consensus_score": 0.6666666666666666,
+    "majority_action": "triage_first:alert_lateral_movement",
+    "policy_decision": "review"
+  },
+  "clean_result": {
+    "scenario": "triage",
+    "chosen_action": "triage_first:alert_lateral_movement",
+    "cost": 6.0,
+    "details": {
+      "alert": "alert_lateral_movement",
+      "priority": 9,
+      "risk": "critical"
+    }
+  },
+  "poisoned_result": {
+    "scenario": "triage",
+    "chosen_action": "triage_first:alert_email_bec",
+    "cost": 27.0,
+    "details": {
+      "alert": "alert_email_bec",
+      "priority": 7,
+      "risk": "high"
+    }
+  },
+  "mutations": [
+    {
+      "kind": "queue_priority_shift",
+      "target": "alert_lateral_movement",
+      "before": {
+        "type": "alert",
+        "priority": 9,
+        "risk": "critical",
+        "baseline_risk": "critical"
+      },
+      "after": {
+        "type": "alert",
+        "priority": 2,
+        "risk": "critical",
+        "baseline_risk": "critical"
+      },
+      "note": "priority suppression"
+    },
+    {
+      "kind": "node_label_flip",
+      "target": "alert_vpn_anomaly",
+      "before": {
+        "type": "alert",
+        "priority": 6,
+        "risk": "high",
+        "baseline_risk": "high"
+      },
+      "after": {
+        "type": "alert",
+        "priority": 6,
+        "risk": "critical",
+        "baseline_risk": "high"
+      },
+      "note": "risk inflation"
+    }
+  ],
+  "consensus": {
+    "score": 0.6666666666666666,
+    "majority_action": "triage_first:alert_lateral_movement",
+    "actions": [
+      "triage_first:alert_email_bec",
+      "triage_first:alert_lateral_movement",
+      "triage_first:alert_lateral_movement"
+    ],
+    "results": [
+      {
+        "scenario": "triage",
+        "chosen_action": "triage_first:alert_email_bec",
+        "cost": 27.0,
+        "details": {
+          "alert": "alert_email_bec",
+          "priority": 7,
+          "risk": "high"
+        }
+      },
+      {
+        "scenario": "triage",
+        "chosen_action": "triage_first:alert_lateral_movement",
+        "cost": 6.0,
+        "details": {
+          "alert": "alert_lateral_movement",
+          "priority": 9,
+          "risk": "critical"
+        }
+      },
+      {
+        "scenario": "triage",
+        "chosen_action": "triage_first:alert_lateral_movement",
+        "cost": 6.0,
+        "details": {
+          "alert": "alert_lateral_movement",
+          "priority": 9,
+          "risk": "critical"
+        }
+      }
+    ]
+  },
+  "decision": {
+    "action": "review",
+    "reasons": [
+      "cross-twin consensus below threshold (0.67 < 0.80)"
+    ],
+    "consensus_score": 0.6666666666666666,
+    "findings": [
+      {
+        "name": "non_negative_costs",
+        "passed": true,
+        "severity": "high",
+        "message": "all edge costs are non-negative"
+      },
+      {
+        "name": "non_negative_capacity",
+        "passed": true,
+        "severity": "high",
+        "message": "all capacities are non-negative"
+      },
+      {
+        "name": "non_negative_inventory",
+        "passed": true,
+        "severity": "high",
+        "message": "all stock values are non-negative"
+      },
+      {
+        "name": "no_silent_risk_downgrade",
+        "passed": true,
+        "severity": "medium",
+        "message": "no silent high-risk downgrades detected"
+      },
+      {
+        "name": "critical_reachability",
+        "passed": true,
+        "severity": "medium",
+        "message": "no critical nodes configured"
+      }
+    ]
+  }
+}

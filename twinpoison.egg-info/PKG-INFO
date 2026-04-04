@@ -1,0 +1,147 @@
+Metadata-Version: 2.4
+Name: twinpoison
+Version: 0.2.0
+Summary: A safe simulation harness for studying world-model poisoning in digital-twin planning pipelines
+Author: Samuel Addington
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: networkx>=3.2
+
+# TwinPoison
+
+TwinPoison is a **simulation-only** Python harness for studying how poisoned digital twins can mislead planning systems into taking unsafe or suboptimal actions.
+
+It is designed for talks, demos, classroom use, red-team exercises in lab environments, and defensive research on **world-model integrity**. It does **not** target real industrial control systems, real facilities, or real operational networks.
+
+## What is new in this release
+
+This DEF CON-oriented bundle adds three practical pieces on top of the original starter framework:
+
+- a **richer stage demo flow** with talk-ready narration
+- a **stronger export layer** that writes JSON, CSV, Markdown, and HTML artifacts
+- a **talk-ready architecture figure** in `docs/figures/`
+
+## What it includes
+
+- A graph-based `DigitalTwin` abstraction using NetworkX
+- Safe mutation operators for topology, weights, capacities, and labels
+- Simple planners for logistics routing, inventory selection, and SOC triage ordering
+- Invariant checks to catch impossible or policy-violating states
+- Cross-twin consensus to compare decisions across multiple independently maintained twins
+- A CLI for running reproducible demos
+- Example scenarios for logistics, inventory, SOC triage, and network reachability
+- A report/export layer for talk artifacts and CI-style evidence capture
+
+## Threat model
+
+TwinPoison models a setting where the agent trusts a digital twin for planning, cost estimation, or prioritization. The attacker does **not** jailbreak the LLM and does **not** need to compromise the downstream tool directly. Instead, the attacker changes the planner's internal simulation enough to alter the chosen action.
+
+This harness focuses on four poisoning families:
+
+1. **Cost distortion** — inflate or deflate route, latency, or processing costs
+2. **Topology poisoning** — add phantom edges, remove real edges, isolate nodes
+3. **State poisoning** — alter inventory levels, risk labels, capacities, or statuses
+4. **Priority poisoning** — re-rank work queues or alert severity to drive dangerous ordering
+
+## Installation
+
+```bash
+python -m pip install -e .
+```
+
+## Demo commands
+
+```bash
+twinpoison demo logistics --stage --export-dir exports
+twinpoison demo triage --stage --export-dir exports
+twinpoison demo inventory --stage --export-dir exports
+twinpoison demo network --stage --export-dir exports
+```
+
+## Exported artifacts
+
+Each exported run writes a timestamped bundle containing:
+
+- `summary.json` — compact machine-readable run summary
+- `mutations.csv` — mutation trace for the poisoned twin
+- `findings.csv` — invariant outcomes and severities
+- `consensus.csv` — per-twin planner outputs
+- `twin_snapshot.json` — full poisoned twin snapshot
+- `report.md` — human-readable narrative summary
+- `report.html` — audience-friendly report for live presentation
+
+## Stage demo support
+
+The CLI can print a compact narration block with `--stage`, and the repo includes:
+
+- `examples/defcon_showcase.py` — sequential four-scenario showcase
+- `docs/DEFCON_DEMO_RUNBOOK.md` — suggested talk flow and command sequence
+
+## Architecture figure
+
+A slide-ready architecture figure is included at:
+
+- `docs/figures/twinpoison_architecture.svg`
+- `docs/figures/twinpoison_architecture.png`
+
+## Defensive ideas built into the harness
+
+TwinPoison ships with lightweight defenses for demonstration purposes:
+
+- **Invariant checking**
+  - no negative costs or capacities
+  - critical nodes must remain reachable
+  - stock cannot go below zero
+  - high-risk alerts cannot be silently downgraded
+- **Cross-twin consensus**
+  - compare plans across multiple twins
+  - raise warnings when the recommended action diverges too sharply
+- **Simulation integrity policy**
+  - block or review actions when invariants fail or consensus confidence is low
+
+## Project structure
+
+```text
+twinpoison/
+  cli.py
+  consensus.py
+  core.py
+  engine.py
+  invariants.py
+  mutators.py
+  reporting.py
+  speaker.py
+  scenarios/
+    inventory.py
+    logistics.py
+    network_topology.py
+    triage.py
+examples/
+  run_demo.py
+  defcon_showcase.py
+docs/
+  DEFCON_DEMO_RUNBOOK.md
+  figures/
+    twinpoison_architecture.svg
+    twinpoison_architecture.png
+tests/
+  test_smoke.py
+```
+
+## Why this is useful for the talk
+
+This codebase supports a 45-minute talk with a live demo arc:
+
+- start from a clean twin
+- show the planner's chosen action
+- apply a small mutation
+- rerun the planner and show that the action changed
+- show whether invariant checking or cross-twin consensus catches it
+- show the exported report artifacts for reproducibility and triage
+- discuss the policy outcome: allow, review, or block
+
+## Notes
+
+- This release is intentionally lightweight and readable.
+- It is built for extension: you can add new planners, new mutation operators, and more formal integrity checks.
+- The current simulations are toy environments meant to demonstrate **world-model poisoning as an attack surface class**.

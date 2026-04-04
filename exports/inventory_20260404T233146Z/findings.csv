@@ -1,0 +1,6 @@
+name,passed,severity,message
+non_negative_costs,True,high,all edge costs are non-negative
+non_negative_capacity,True,high,all capacities are non-negative
+non_negative_inventory,True,high,all stock values are non-negative
+no_silent_risk_downgrade,True,medium,no silent high-risk downgrades detected
+critical_reachability,True,medium,no critical nodes configured

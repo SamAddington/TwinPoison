@@ -1,0 +1,3 @@
+kind,target,note,before,after
+queue_priority_shift,alert_lateral_movement,priority suppression,"{""baseline_risk"": ""critical"", ""priority"": 9, ""risk"": ""critical"", ""type"": ""alert""}","{""baseline_risk"": ""critical"", ""priority"": 2, ""risk"": ""critical"", ""type"": ""alert""}"
+node_label_flip,alert_vpn_anomaly,risk inflation,"{""baseline_risk"": ""high"", ""priority"": 6, ""risk"": ""high"", ""type"": ""alert""}","{""baseline_risk"": ""high"", ""priority"": 6, ""risk"": ""critical"", ""type"": ""alert""}"

@@ -1,0 +1,104 @@
+{
+  "name": "logistics_base_poisoned",
+  "scenario": "logistics",
+  "metadata": {
+    "origin": "hub",
+    "destination": "city_c",
+    "source": "hub",
+    "critical_nodes": [
+      "city_c"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "hub",
+      "type": "location"
+    },
+    {
+      "id": "north_dc",
+      "type": "location"
+    },
+    {
+      "id": "south_dc",
+      "type": "location"
+    },
+    {
+      "id": "city_a",
+      "type": "location"
+    },
+    {
+      "id": "city_b",
+      "type": "location"
+    },
+    {
+      "id": "city_c",
+      "type": "location"
+    }
+  ],
+  "edges": [
+    {
+      "source": "hub",
+      "target": "north_dc",
+      "cost": 3.0,
+      "capacity": 10.0,
+      "trust": "baseline"
+    },
+    {
+      "source": "hub",
+      "target": "south_dc",
+      "cost": 10.0,
+      "capacity": 10.0,
+      "trust": "baseline"
+    },
+    {
+      "source": "north_dc",
+      "target": "city_a",
+      "cost": 1.0,
+      "capacity": 8.0,
+      "trust": "baseline"
+    },
+    {
+      "source": "north_dc",
+      "target": "city_b",
+      "cost": 1.3,
+      "capacity": 8.0,
+      "trust": "baseline"
+    },
+    {
+      "source": "north_dc",
+      "target": "city_c",
+      "cost": 0.2,
+      "capacity": 1.0,
+      "trust": "unverified",
+      "phantom": true
+    },
+    {
+      "source": "south_dc",
+      "target": "city_b",
+      "cost": 1.0,
+      "capacity": 8.0,
+      "trust": "baseline"
+    },
+    {
+      "source": "south_dc",
+      "target": "city_c",
+      "cost": 1.1,
+      "capacity": 8.0,
+      "trust": "baseline"
+    },
+    {
+      "source": "city_a",
+      "target": "city_c",
+      "cost": 2.2,
+      "capacity": 4.0,
+      "trust": "baseline"
+    },
+    {
+      "source": "city_b",
+      "target": "city_c",
+      "cost": 1.2,
+      "capacity": 6.0,
+      "trust": "baseline"
+    }
+  ]
+}

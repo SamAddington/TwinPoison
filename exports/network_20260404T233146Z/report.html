@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>TwinPoison Report - network</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; margin: 2rem; color: #111827; }
+    h1, h2 { margin-bottom: 0.4rem; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(180px, 1fr)); gap: 1rem; margin: 1.2rem 0 1.4rem; }
+    .card { border: 1px solid #d1d5db; border-radius: 14px; padding: 1rem; background: #f9fafb; }
+    table { border-collapse: collapse; width: 100%; margin: 1rem 0 1.5rem; }
+    th, td { border: 1px solid #d1d5db; padding: 0.6rem; text-align: left; vertical-align: top; }
+    th { background: #f3f4f6; }
+    code { background: #f3f4f6; padding: 0.1rem 0.3rem; border-radius: 6px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  </style>
+</head>
+<body>
+  <h1>TwinPoison Report: network</h1>
+  <p class="mono">Generated at: 2026-04-04T23:31:46.427863+00:00</p>
+  <div class="grid">
+    <div class="card"><strong>Clean action</strong><br><code>reroute:ingress-&gt;core_a-&gt;ids-&gt;siem</code><br>cost=2.4</div>
+    <div class="card"><strong>Poisoned action</strong><br><code>reroute:ingress-&gt;core_a-&gt;seg_a-&gt;siem</code><br>cost=3.4</div>
+    <div class="card"><strong>Policy decision</strong><br><code>review</code><br>consensus=0.67</div>
+  </div>
+  <h2>Mutations</h2>
+  <table>
+    <thead><tr><th>Kind</th><th>Target</th><th>Note</th></tr></thead>
+    <tbody><tr><td>edge_cost_shift</td><td>core_a-&gt;ids</td><td>telemetry detour inflation</td></tr><tr><td>phantom_edge</td><td>core_b-&gt;siem</td><td>unverified shortcut to SIEM</td></tr></tbody>
+  </table>
+  <h2>Integrity findings</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Status</th><th>Severity</th><th>Message</th></tr></thead>
+    <tbody><tr><td>non_negative_costs</td><td>PASS</td><td>high</td><td>all edge costs are non-negative</td></tr><tr><td>non_negative_capacity</td><td>PASS</td><td>high</td><td>all capacities are non-negative</td></tr><tr><td>non_negative_inventory</td><td>PASS</td><td>high</td><td>all stock values are non-negative</td></tr><tr><td>no_silent_risk_downgrade</td><td>PASS</td><td>medium</td><td>no silent high-risk downgrades detected</td></tr><tr><td>critical_reachability</td><td>PASS</td><td>high</td><td>all critical nodes are reachable from the configured source</td></tr></tbody>
+  </table>
+  <h2>Consensus actions</h2>
+  <ul><li>Twin 0: <code>reroute:ingress-&gt;core_a-&gt;seg_a-&gt;siem</code> (cost=3.4)</li><li>Twin 1: <code>reroute:ingress-&gt;core_a-&gt;ids-&gt;siem</code> (cost=2.4)</li><li>Twin 2: <code>reroute:ingress-&gt;core_a-&gt;ids-&gt;siem</code> (cost=2.4)</li></ul>
+  <h2>Policy reasons</h2>
+  <ul><li>cross-twin consensus below threshold (0.67 &lt; 0.80)</li></ul>
+  <h2>Why this matters</h2>
+  <p>This export is designed for live demos, CI artifacts, and paper appendices. It preserves both the mutation trace and the integrity-policy outcome in a format that is easy to inspect, archive, and compare across runs.</p>
+</body>
+</html>

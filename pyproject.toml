@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "twinpoison"
+version = "0.2.0"
+description = "A safe simulation harness for studying world-model poisoning in digital-twin planning pipelines"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  {name = "Samuel Addington"}
+]
+dependencies = [
+  "networkx>=3.2"
+]
+
+[project.scripts]
+twinpoison = "twinpoison.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["twinpoison*"]

@@ -1,0 +1,4 @@
+twin_index,scenario,chosen_action,cost,details
+0,logistics,route:hub->north_dc->city_c,3.2,"{""destination"": ""city_c"", ""origin"": ""hub"", ""path"": [""hub"", ""north_dc"", ""city_c""]}"
+1,logistics,route:hub->south_dc->city_c,3.6,"{""destination"": ""city_c"", ""origin"": ""hub"", ""path"": [""hub"", ""south_dc"", ""city_c""]}"
+2,logistics,route:hub->south_dc->city_c,3.6,"{""destination"": ""city_c"", ""origin"": ""hub"", ""path"": [""hub"", ""south_dc"", ""city_c""]}"

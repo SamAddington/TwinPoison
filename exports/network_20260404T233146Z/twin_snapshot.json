@@ -1,0 +1,110 @@
+{
+  "name": "network_base_poisoned",
+  "scenario": "network",
+  "metadata": {
+    "origin": "ingress",
+    "destination": "siem",
+    "source": "ingress",
+    "critical_nodes": [
+      "ids",
+      "siem"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "ingress",
+      "type": "network"
+    },
+    {
+      "id": "core_a",
+      "type": "network"
+    },
+    {
+      "id": "core_b",
+      "type": "network"
+    },
+    {
+      "id": "ids",
+      "type": "critical_service"
+    },
+    {
+      "id": "siem",
+      "type": "critical_service"
+    },
+    {
+      "id": "seg_a",
+      "type": "network"
+    },
+    {
+      "id": "seg_b",
+      "type": "network"
+    }
+  ],
+  "edges": [
+    {
+      "source": "ingress",
+      "target": "core_a",
+      "latency": 1.0,
+      "cost": 1.0,
+      "capacity": 10.0,
+      "trust": "baseline"
+    },
+    {
+      "source": "ingress",
+      "target": "core_b",
+      "latency": 1.2,
+      "cost": 1.2,
+      "capacity": 10.0,
+      "trust": "baseline"
+    },
+    {
+      "source": "core_a",
+      "target": "ids",
+      "latency": 8.0,
+      "cost": 8.0,
+      "capacity": 10.0,
+      "trust": "baseline"
+    },
+    {
+      "source": "core_a",
+      "target": "seg_a",
+      "latency": 1.0,
+      "cost": 1.0,
+      "capacity": 10.0,
+      "trust": "baseline"
+    },
+    {
+      "source": "core_b",
+      "target": "seg_b",
+      "latency": 1.0,
+      "cost": 1.0,
+      "capacity": 10.0,
+      "trust": "baseline"
+    },
+    {
+      "source": "core_b",
+      "target": "siem",
+      "latency": 2.2,
+      "cost": 0.3,
+      "capacity": 5.0,
+      "trust": "unverified",
+      "phantom": true
+    },
+    {
+      "source": "ids",
+      "target": "siem",
+      "latency": 0.6,
+      "cost": 0.6,
+      "capacity": 10.0,
+      "trust": "baseline"
+    },
+    {
+      "source": "seg_a",
+      "target": "siem",
+      "latency": 1.4,
+      "cost": 1.4,
+      "capacity": 10.0,
+      "trust": "baseline"
+    }
+  ]
+}

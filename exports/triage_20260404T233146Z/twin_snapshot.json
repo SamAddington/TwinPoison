@@ -1,0 +1,38 @@
+{
+  "name": "triage_base_poisoned",
+  "scenario": "triage",
+  "metadata": {
+    "source": "soc_queue"
+  },
+  "nodes": [
+    {
+      "id": "alert_email_bec",
+      "type": "alert",
+      "priority": 7,
+      "risk": "high",
+      "baseline_risk": "high"
+    },
+    {
+      "id": "alert_lateral_movement",
+      "type": "alert",
+      "priority": 2,
+      "risk": "critical",
+      "baseline_risk": "critical"
+    },
+    {
+      "id": "alert_malware_low",
+      "type": "alert",
+      "priority": 4,
+      "risk": "medium",
+      "baseline_risk": "medium"
+    },
+    {
+      "id": "alert_vpn_anomaly",
+      "type": "alert",
+      "priority": 6,
+      "risk": "critical",
+      "baseline_risk": "high"
+    }
+  ],
+  "edges": []
+}

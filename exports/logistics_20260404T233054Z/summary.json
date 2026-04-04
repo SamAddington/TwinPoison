@@ -1,0 +1,164 @@
+{
+  "generated_at_utc": "2026-04-04T23:30:54.170342+00:00",
+  "scenario": "logistics",
+  "summary": {
+    "clean_action": "route:hub->south_dc->city_c",
+    "clean_cost": 3.6,
+    "poisoned_action": "route:hub->north_dc->city_c",
+    "poisoned_cost": 3.2,
+    "action_changed": true,
+    "cost_delta": -0.4,
+    "consensus_score": 0.6666666666666666,
+    "majority_action": "route:hub->south_dc->city_c",
+    "policy_decision": "review"
+  },
+  "clean_result": {
+    "scenario": "logistics",
+    "chosen_action": "route:hub->south_dc->city_c",
+    "cost": 3.6,
+    "details": {
+      "path": [
+        "hub",
+        "south_dc",
+        "city_c"
+      ],
+      "origin": "hub",
+      "destination": "city_c"
+    }
+  },
+  "poisoned_result": {
+    "scenario": "logistics",
+    "chosen_action": "route:hub->north_dc->city_c",
+    "cost": 3.2,
+    "details": {
+      "path": [
+        "hub",
+        "north_dc",
+        "city_c"
+      ],
+      "origin": "hub",
+      "destination": "city_c"
+    }
+  },
+  "mutations": [
+    {
+      "kind": "edge_cost_shift",
+      "target": "hub->south_dc",
+      "before": {
+        "cost": 2.5,
+        "capacity": 10.0,
+        "trust": "baseline"
+      },
+      "after": {
+        "cost": 10.0,
+        "capacity": 10.0,
+        "trust": "baseline"
+      },
+      "note": "phantom congestion"
+    },
+    {
+      "kind": "phantom_edge",
+      "target": "north_dc->city_c",
+      "before": {},
+      "after": {
+        "cost": 0.2,
+        "capacity": 1.0,
+        "trust": "unverified",
+        "phantom": true
+      },
+      "note": "implausibly cheap shortcut"
+    }
+  ],
+  "consensus": {
+    "score": 0.6666666666666666,
+    "majority_action": "route:hub->south_dc->city_c",
+    "actions": [
+      "route:hub->north_dc->city_c",
+      "route:hub->south_dc->city_c",
+      "route:hub->south_dc->city_c"
+    ],
+    "results": [
+      {
+        "scenario": "logistics",
+        "chosen_action": "route:hub->north_dc->city_c",
+        "cost": 3.2,
+        "details": {
+          "path": [
+            "hub",
+            "north_dc",
+            "city_c"
+          ],
+          "origin": "hub",
+          "destination": "city_c"
+        }
+      },
+      {
+        "scenario": "logistics",
+        "chosen_action": "route:hub->south_dc->city_c",
+        "cost": 3.6,
+        "details": {
+          "path": [
+            "hub",
+            "south_dc",
+            "city_c"
+          ],
+          "origin": "hub",
+          "destination": "city_c"
+        }
+      },
+      {
+        "scenario": "logistics",
+        "chosen_action": "route:hub->south_dc->city_c",
+        "cost": 3.6,
+        "details": {
+          "path": [
+            "hub",
+            "south_dc",
+            "city_c"
+          ],
+          "origin": "hub",
+          "destination": "city_c"
+        }
+      }
+    ]
+  },
+  "decision": {
+    "action": "review",
+    "reasons": [
+      "cross-twin consensus below threshold (0.67 < 0.80)"
+    ],
+    "consensus_score": 0.6666666666666666,
+    "findings": [
+      {
+        "name": "non_negative_costs",
+        "passed": true,
+        "severity": "high",
+        "message": "all edge costs are non-negative"
+      },
+      {
+        "name": "non_negative_capacity",
+        "passed": true,
+        "severity": "high",
+        "message": "all capacities are non-negative"
+      },
+      {
+        "name": "non_negative_inventory",
+        "passed": true,
+        "severity": "high",
+        "message": "all stock values are non-negative"
+      },
+      {
+        "name": "no_silent_risk_downgrade",
+        "passed": true,
+        "severity": "medium",
+        "message": "no silent high-risk downgrades detected"
+      },
+      {
+        "name": "critical_reachability",
+        "passed": true,
+        "severity": "high",
+        "message": "all critical nodes are reachable from the configured source"
+      }
+    ]
+  }
+}

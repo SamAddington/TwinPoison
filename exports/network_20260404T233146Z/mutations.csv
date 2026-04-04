@@ -1,0 +1,3 @@
+kind,target,note,before,after
+edge_cost_shift,core_a->ids,telemetry detour inflation,"{""capacity"": 10.0, ""cost"": 0.8, ""latency"": 0.8, ""trust"": ""baseline""}","{""capacity"": 10.0, ""cost"": 8.0, ""latency"": 8.0, ""trust"": ""baseline""}"
+phantom_edge,core_b->siem,unverified shortcut to SIEM,{},"{""capacity"": 5.0, ""cost"": 0.3, ""latency"": 2.2, ""phantom"": true, ""trust"": ""unverified""}"
